@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/f110/release-radar/cmd/release-radar",
+    visibility = ["//visibility:private"],
+    deps = ["//pkg/producer:go_default_library"],
+)
+
+go_binary(
+    name = "release-radar",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

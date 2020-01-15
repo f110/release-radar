@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "database.go",
+        "github_release_producer.go",
+        "release.go",
+        "version_parser.go",
+    ],
+    importpath = "github.com/f110/release-radar/pkg/producer",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_deckarep_golang_set//:go_default_library",
+        "@com_github_google_go_github_v28//github:go_default_library",
+        "@com_github_syndtr_goleveldb//leveldb:go_default_library",
+        "@com_github_syndtr_goleveldb//leveldb/util:go_default_library",
+        "@org_golang_x_xerrors//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "release_test.go",
+        "version_parser_test.go",
+    ],
+    embed = [":go_default_library"],
+)

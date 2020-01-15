@@ -19,10 +19,14 @@ http_archive(
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 go_rules_dependencies()
 
 go_register_toolchains()
 
 gazelle_dependencies()
+
+load("//:deps.bzl", "external_deps")
+
+external_deps()
